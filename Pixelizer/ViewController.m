@@ -114,7 +114,6 @@ static NSString *kFrontCamera = @"com.apple.avfoundation.avcapturedevice.built-i
     if (self.liveColor.on && !self.skView.hidden) {
         ((BoxesScene *)self.skView.scene).image = scaledImage;
     }
-
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput
@@ -127,51 +126,6 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     UIImage *hopefully = [UIImage.alloc initWithCIImage:[CIImage imageWithCVImageBuffer:imageBuffer]];
     dispatch_async(dispatch_get_main_queue(), ^{ [self applyColorImage:hopefully]; });
     CVPixelBufferUnlockBaseAddress(imageBuffer, kCVPixelBufferLock_ReadOnly);
-//    vImagePixelCount width = CVPixelBufferGetWidthOfPlane(imageBuffer, 0);
-//    vImagePixelCount height = CVPixelBufferGetHeightOfPlane(imageBuffer, 0);
-//
-//    size_t bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(imageBuffer, 0);
-//    vImagePixelCount size = MIN(height, width);
-//    vImagePixelCount initialOffset = ABS(width - height) / 2;
-//    vImagePixelCount offset = (width > height) ? initialOffset : bytesPerRow * initialOffset;
-//
-//    vImage_Buffer grayBuffer = {
-//        .data = CVPixelBufferGetBaseAddressOfPlane(imageBuffer, 0) + offset,
-//        .height = size,
-//        .width = size,
-//        .rowBytes = bytesPerRow
-//    };
-//
-//    vImagePixelCount scaledSize = self.pixelation;
-//    UInt8 *scaledData = malloc(scaledSize * scaledSize);
-//
-//    vImage_Buffer scaledBuffer = {
-//        .data = scaledData,
-//        .height = scaledSize,
-//        .width = scaledSize,
-//        .rowBytes = scaledSize
-//    };
-//
-//    vImageScale_Planar8(&grayBuffer, &scaledBuffer, NULL, kvImageNoFlags);
-//    CVPixelBufferUnlockBaseAddress(imageBuffer, kCVPixelBufferLock_ReadOnly);
-//
-//    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
-//    vImage_CGImageFormat format = {
-//        .bitsPerComponent = 8,
-//        .bitsPerPixel = 8,
-//        .colorSpace = colorSpace,
-//        .bitmapInfo = kCGBitmapByteOrderDefault,
-//        .version = 0,
-//        .decode = nil,
-//        .renderingIntent = kCGRenderingIntentDefault
-//    };
-//
-//    CGImageRef imageRef = vImageCreateCGImageFromBuffer(&scaledBuffer, &format, nil, nil, kvImageNoFlags, nil);
-//    UIImage *image = [UIImage imageWithCGImage:imageRef scale:1.0 orientation:UIImageOrientationRight];
-//    CGColorSpaceRelease(colorSpace);
-//    CGImageRelease(imageRef);
-//    free(scaledData);
-//    dispatch_async(dispatch_get_main_queue(), ^{ [self applyCameraImage:hopefully]; });
 }
 
 
