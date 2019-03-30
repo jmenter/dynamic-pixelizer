@@ -113,6 +113,7 @@
     CFDataRef rawData = CGDataProviderCopyData(dataProvider);
     const UInt8 *buffer = CFDataGetBytePtr(rawData);
     size_t bytesPerRow = CGImageGetBytesPerRow(image);
+    size_t components = CGImageGetBitsPerPixel(image) / CGImageGetBitsPerComponent(image);
     cpSpaceSetGravity(_chipmunkSpace, cpv(self.platformSpecificAcceleration.x * 100,
                                           self.platformSpecificAcceleration.y * 100));
     
@@ -128,7 +129,7 @@
             size_t spritePixelX = node.pixelXPosition;
             size_t spritePixelY = node.pixelYPosition;
             
-            size_t pixelIndex = (bytesPerRow * spritePixelY) + spritePixelX * 4;
+            size_t pixelIndex = (bytesPerRow * spritePixelY) + spritePixelX * components;
             UInt8 pixelComponent = buffer[pixelIndex];
             UInt8 pixelComponent2 = buffer[pixelIndex + 1];
             UInt8 pixelComponent3 = buffer[pixelIndex + 2];
