@@ -3,6 +3,6 @@
 
 @interface UIImage (Extras)
 
-+ (UIImage *)imageWithEllipseOfColor:(UIColor *)color size:(CGSize)size;
++ (UIImage *)imageWithEllipseOfSize:(CGSize)size color:(UIColor *)color;
 
 @end

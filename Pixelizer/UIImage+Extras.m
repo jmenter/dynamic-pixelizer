@@ -3,7 +3,7 @@
 
 @implementation UIImage (Extras)
 
-+ (UIImage *)imageWithEllipseOfColor:(UIColor *)color size:(CGSize)size;
++ (UIImage *)imageWithEllipseOfSize:(CGSize)size color:(UIColor *)color;
 {
     UIGraphicsBeginImageContextWithOptions(size, NO, 0.f);
     

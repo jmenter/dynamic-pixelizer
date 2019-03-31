@@ -30,7 +30,7 @@
     
     [self createPhysicsWorld];
     [self createSceneContents];
-    self.backgroundColor = UIColor.whiteColor;
+    self.backgroundColor = UIColor.blackColor;
 }
 
 - (void)createPhysicsWorld;
@@ -41,11 +41,11 @@
         cpv(-wallWidth, -wallWidth),
         cpv(self.view.bounds.size.width + wallWidth, -wallWidth),
         cpv(self.view.bounds.size.width + wallWidth, self.view.bounds.size.height + wallWidth),
-        cpv(-wallWidth, self.view.bounds.size.height + wallWidth)};
+        cpv(-wallWidth, self.view.bounds.size.height + wallWidth),
+        cpv(-wallWidth, -wallWidth)};
     for (int i = 0; i < 4; i++) {
-        int nexti = i < 3 ? i + 1 : 0;
         cpShape *shape = cpSegmentShapeNew(cpSpaceGetStaticBody(_chipmunkSpace),
-                                           groundCorners[i], groundCorners[nexti], wallWidth + 16);
+                                           groundCorners[i], groundCorners[i + 1], wallWidth + 16);
         cpShapeSetFriction(shape, 1);
         cpSpaceAddShape(_chipmunkSpace, shape);
     }
@@ -60,16 +60,18 @@
     
     CFDataRef rawData = CGDataProviderCopyData(CGImageGetDataProvider(image));
     UInt8 *imageBuffer = (UInt8 *)CFDataGetBytePtr(rawData);
+    
     CGFloat boxWidth = (self.size.width - 16) / width;
     CGFloat pixelWidth = (self.size.width - 16) / width;
-    NSLog(@"creating scene of: %@", NSStringFromCGSize(self.image.size));
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            NSInteger index = x + (width * y);
-            UInt8 pixelComponentB = imageBuffer[index * components];
-            UInt8 pixelComponentG = imageBuffer[index * components + 1];
-            UInt8 pixelComponentR = imageBuffer[index * components + 2];
-            UIColor *color = [UIColor colorWithRed:pixelComponentR / 255.f green:pixelComponentG / 255.f blue:pixelComponentB / 255.f alpha:1];
+            NSInteger pixelIndex = (width * y) + x * components;
+            UInt8 pixelComponentB = imageBuffer[pixelIndex];
+            UInt8 pixelComponentG = imageBuffer[pixelIndex + 1];
+            UInt8 pixelComponentR = imageBuffer[pixelIndex + 2];
+            UIColor *color = [UIColor colorWithRed:pixelComponentR / 255.f
+                                             green:pixelComponentG / 255.f
+                                              blue:pixelComponentB / 255.f alpha:1];
             CGSize boxSize = CGSizeMake(boxWidth, boxWidth);
             SKAssignableSpriteNode *spriteNode = [SKAssignableSpriteNode shapeWithColor:color
                                                                                    size:boxSize

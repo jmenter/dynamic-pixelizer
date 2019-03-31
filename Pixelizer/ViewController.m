@@ -83,19 +83,23 @@ static NSString *kFrontCamera = @"com.apple.avfoundation.avcapturedevice.built-i
     self.imageView.hidden = YES;
 }
 
-- (void)applyCameraImage:(UIImage *)image;
+- (void)captureOutput:(AVCaptureOutput *)captureOutput
+didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
+       fromConnection:(AVCaptureConnection *)connection
 {
-    self.imageView.image = image;
-    if (self.liveColor.on && !self.skView.hidden) {
-        ((BoxesScene *)self.skView.scene).image = image;
-    }
+    CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+    CVPixelBufferLockBaseAddress(imageBuffer, kCVPixelBufferLock_ReadOnly);
+    
+    UIImage *capturedImage = [UIImage.alloc initWithCIImage:[CIImage imageWithCVImageBuffer:imageBuffer]];
+    dispatch_async(dispatch_get_main_queue(), ^{ [self processImage:capturedImage]; });
+    CVPixelBufferUnlockBaseAddress(imageBuffer, kCVPixelBufferLock_ReadOnly);
 }
 
-- (void)applyColorImage:(UIImage *)image;
+- (void)processImage:(UIImage *)image;
 {
     CGSize newSize = CGSizeMake(self.pixelation, self.pixelation);
     UIGraphicsBeginImageContextWithOptions(newSize, YES, 1);
-
+    
     CGRect scaledImageRect = CGRectZero;
     
     CGFloat aspectWidth = newSize.width / image.size.width;
@@ -115,18 +119,5 @@ static NSString *kFrontCamera = @"com.apple.avfoundation.avcapturedevice.built-i
         ((BoxesScene *)self.skView.scene).image = scaledImage;
     }
 }
-
-- (void)captureOutput:(AVCaptureOutput *)captureOutput
-didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
-       fromConnection:(AVCaptureConnection *)connection
-{
-    CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
-    CVPixelBufferLockBaseAddress(imageBuffer, kCVPixelBufferLock_ReadOnly);
-    
-    UIImage *hopefully = [UIImage.alloc initWithCIImage:[CIImage imageWithCVImageBuffer:imageBuffer]];
-    dispatch_async(dispatch_get_main_queue(), ^{ [self applyColorImage:hopefully]; });
-    CVPixelBufferUnlockBaseAddress(imageBuffer, kCVPixelBufferLock_ReadOnly);
-}
-
 
 @end
