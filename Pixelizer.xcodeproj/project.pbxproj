@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		630BFD36225103AD00C430A8 /* LabeledSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 630BFD35225103AD00C430A8 /* LabeledSlider.m */; };
 		6378EC0721A7122F0071B6A8 /* BoxesScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 6378EC0521A7122F0071B6A8 /* BoxesScene.m */; };
 		6378EC4721A712B70071B6A8 /* cpSpace.c in Sources */ = {isa = PBXBuildFile; fileRef = 6378EC0921A712B70071B6A8 /* cpSpace.c */; };
 		6378EC4821A712B70071B6A8 /* cpSpaceStep.c in Sources */ = {isa = PBXBuildFile; fileRef = 6378EC0A21A712B70071B6A8 /* cpSpaceStep.c */; };
@@ -52,6 +53,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		630BFD34225103AD00C430A8 /* LabeledSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LabeledSlider.h; sourceTree = "<group>"; };
+		630BFD35225103AD00C430A8 /* LabeledSlider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LabeledSlider.m; sourceTree = "<group>"; };
 		6378EC0521A7122F0071B6A8 /* BoxesScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoxesScene.m; sourceTree = "<group>"; };
 		6378EC0621A7122F0071B6A8 /* BoxesScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoxesScene.h; sourceTree = "<group>"; };
 		6378EC0921A712B70071B6A8 /* cpSpace.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cpSpace.c; sourceTree = "<group>"; };
@@ -236,6 +239,8 @@
 				6378EC0821A712B70071B6A8 /* chipmunk */,
 				63815F6321A6216700AEAE77 /* AppDelegate.h */,
 				63815F6421A6216700AEAE77 /* AppDelegate.m */,
+				630BFD34225103AD00C430A8 /* LabeledSlider.h */,
+				630BFD35225103AD00C430A8 /* LabeledSlider.m */,
 				63815F6621A6216700AEAE77 /* ViewController.h */,
 				63815F6721A6216700AEAE77 /* ViewController.m */,
 				6378EC0621A7122F0071B6A8 /* BoxesScene.h */,
@@ -357,6 +362,7 @@
 				6378EC5321A712B70071B6A8 /* cpPinJoint.c in Sources */,
 				6378EC6621A712B70071B6A8 /* cpHastySpace.c in Sources */,
 				6378EC5D21A712B70071B6A8 /* cpConstraint.c in Sources */,
+				630BFD36225103AD00C430A8 /* LabeledSlider.m in Sources */,
 				6378EC5021A712B70071B6A8 /* cpSweep1D.c in Sources */,
 				6378EC6521A712B70071B6A8 /* cpSlideJoint.c in Sources */,
 				6378EC6221A712B70071B6A8 /* cpRotaryLimitJoint.c in Sources */,

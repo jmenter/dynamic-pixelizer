@@ -10,8 +10,8 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UISlider *slider;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
-@property (weak, nonatomic) IBOutlet UISwitch *liveColor;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *shapeControl;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *liveControl;
 @property (weak, nonatomic) IBOutlet SKView *skView;
 
 @property (nonatomic) AVCaptureSession *session;
@@ -66,21 +66,26 @@ static NSString *kFrontCamera = @"com.apple.avfoundation.avcapturedevice.built-i
     if (self.device) { [self.session startRunning]; }
     self.imageView.hidden = NO;
     self.skView.hidden = YES;
+    self.slider.enabled = YES;
+    self.shapeControl.enabled = YES;
+
     [self.skView presentScene:[SKScene.alloc initWithSize:CGSizeZero]];
 }
 
 - (void)imageViewTap:(UITapGestureRecognizer *)tapGR;
 {
-    if (!self.liveColor.on) {
+    if (!self.liveControl.selectedSegmentIndex) {
         [self.session stopRunning];
     }
     BoxesScene *scene = [BoxesScene.alloc initWithSize:self.skView.bounds.size
                                                  image:self.imageView.image
-                         circles:self.segmentedControl.selectedSegmentIndex == 1];
-    scene.liveColor = self.liveColor.on;
+                         circles:self.shapeControl.selectedSegmentIndex == 1];
+    scene.liveColor = self.liveControl.selectedSegmentIndex;
     [self.skView presentScene:scene];
     self.skView.hidden = NO;
     self.imageView.hidden = YES;
+    self.slider.enabled = NO;
+    self.shapeControl.enabled = NO;
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput
@@ -115,7 +120,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     [image drawInRect:scaledImageRect];
     UIImage *scaledImage = [UIImage imageWithCGImage:UIGraphicsGetImageFromCurrentImageContext().CGImage];
     self.imageView.image = scaledImage;
-    if (self.liveColor.on && !self.skView.hidden) {
+    if (self.liveControl.selectedSegmentIndex && !self.skView.hidden) {
         ((BoxesScene *)self.skView.scene).image = scaledImage;
     }
 }

@@ -53,6 +53,8 @@
 
 - (void)createSceneContents;
 {
+    CGFloat verticalOffset = 94;
+    CGFloat horizontalMargin = 16;
     CGImageRef image = self.image.CGImage;
     size_t width = CGImageGetWidth(image);
     size_t height = CGImageGetHeight(image);
@@ -61,24 +63,22 @@
     CFDataRef rawData = CGDataProviderCopyData(CGImageGetDataProvider(image));
     UInt8 *imageBuffer = (UInt8 *)CFDataGetBytePtr(rawData);
     
-    CGFloat boxWidth = (self.size.width - 16) / width;
-    CGFloat pixelWidth = (self.size.width - 16) / width;
+    CGFloat boxWidth = (self.size.width - horizontalMargin * 2) / width;
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            NSInteger pixelIndex = (width * y) + x * components;
-            UInt8 pixelComponentB = imageBuffer[pixelIndex];
-            UInt8 pixelComponentG = imageBuffer[pixelIndex + 1];
-            UInt8 pixelComponentR = imageBuffer[pixelIndex + 2];
-            UIColor *color = [UIColor colorWithRed:pixelComponentR / 255.f
-                                             green:pixelComponentG / 255.f
-                                              blue:pixelComponentB / 255.f alpha:1];
+            NSInteger index = (x + (width * y)) * components;
+            UInt8 pixelComponentB = imageBuffer[index];
+            UInt8 pixelComponentG = imageBuffer[index + 1];
+            UInt8 pixelComponentR = imageBuffer[index + 2];
+            UIColor *color = [UIColor colorWithRed:pixelComponentR / 255.f green:pixelComponentG / 255.f blue:pixelComponentB / 255.f alpha:1];
             CGSize boxSize = CGSizeMake(boxWidth, boxWidth);
             SKAssignableSpriteNode *spriteNode = [SKAssignableSpriteNode shapeWithColor:color
                                                                                    size:boxSize
                                                                                circular:_circles];
             spriteNode.pixelXPosition = x;
             spriteNode.pixelYPosition = y;
-            spriteNode.position = CGPointMake( (x * pixelWidth) + 16, self.view.bounds.size.height - 58 -  (y * pixelWidth));
+            spriteNode.position = CGPointMake((x * boxWidth) + 16,
+                                              self.view.bounds.size.height - verticalOffset - (y * boxWidth));
             spriteNode.mass = (pixelComponentG / 25.f) + 1;
             [self addChild:spriteNode];
             cpFloat moment;
@@ -135,8 +135,9 @@
             UInt8 pixelComponent = buffer[pixelIndex];
             UInt8 pixelComponent2 = buffer[pixelIndex + 1];
             UInt8 pixelComponent3 = buffer[pixelIndex + 2];
-            UIColor *color = [UIColor colorWithRed:pixelComponent3 / 255.f green:pixelComponent2 / 255.f blue:pixelComponent / 255.f alpha:1];
-
+            UIColor *color = [UIColor colorWithRed:pixelComponent3 / 255.f
+                                             green:pixelComponent2 / 255.f
+                                              blue:pixelComponent / 255.f alpha:1];
             if (useCircles) {
                 node.texture = [SKTexture circleTextureWithColor:color size:node.size];
             } else {

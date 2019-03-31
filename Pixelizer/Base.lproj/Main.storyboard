@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,50 +21,57 @@
                             <skView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xtN-8W-xyG">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </skView>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="32" minValue="4" maxValue="64" translatesAutoresizingMaskIntoConstraints="NO" id="ZXn-L9-yih">
-                                <rect key="frame" x="14" y="20" width="153" height="31"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="32" minValue="4" maxValue="64" translatesAutoresizingMaskIntoConstraints="NO" id="ZXn-L9-yih" customClass="LabeledSlider">
+                                <rect key="frame" x="14" y="56" width="347" height="31"/>
                                 <connections>
                                     <action selector="sliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="8fW-UD-x4x"/>
                                 </connections>
                             </slider>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dxs-bA-hAn">
-                                <rect key="frame" x="16" y="58" width="343" height="343"/>
+                                <rect key="frame" x="16" y="94" width="343" height="343"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Dxs-bA-hAn" secondAttribute="height" multiplier="1:1" id="XSR-f6-DG0"/>
                                 </constraints>
                             </imageView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="gxH-69-w5U">
+                                <rect key="frame" x="191.5" y="20" width="167.5" height="29"/>
+                                <segments>
+                                    <segment title="Static"/>
+                                    <segment title="Live"/>
+                                </segments>
+                            </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="tI9-Ig-FUX">
-                                <rect key="frame" x="173" y="20" width="129" height="29"/>
+                                <rect key="frame" x="16" y="20" width="167.5" height="29"/>
                                 <segments>
                                     <segment title="Squares"/>
                                     <segment title="Circles"/>
                                 </segments>
                             </segmentedControl>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Vn-TV-KzU">
-                                <rect key="frame" x="310" y="20" width="51" height="31"/>
-                            </switch>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="7Vn-TV-KzU" firstAttribute="leading" secondItem="tI9-Ig-FUX" secondAttribute="trailing" constant="8" id="2bJ-Vv-3k6"/>
+                            <constraint firstItem="tI9-Ig-FUX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="3BC-jk-UbH"/>
+                            <constraint firstItem="tI9-Ig-FUX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="4ay-da-mAA"/>
                             <constraint firstItem="ZXn-L9-yih" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="J0Y-Qr-ldQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Dxs-bA-hAn" secondAttribute="trailing" constant="16" id="NNI-j1-Dqc"/>
-                            <constraint firstItem="7Vn-TV-KzU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Nzb-r7-8Ip"/>
                             <constraint firstItem="Dxs-bA-hAn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Qf3-dK-UEo"/>
                             <constraint firstItem="Dxs-bA-hAn" firstAttribute="top" secondItem="ZXn-L9-yih" secondAttribute="bottom" constant="8" id="T5o-TO-6q1"/>
-                            <constraint firstItem="ZXn-L9-yih" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="UEN-lu-RdZ"/>
+                            <constraint firstItem="gxH-69-w5U" firstAttribute="leading" secondItem="tI9-Ig-FUX" secondAttribute="trailing" constant="8" id="UUp-Zc-fsG"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gxH-69-w5U" secondAttribute="trailing" constant="16" id="WEs-u2-0l7"/>
                             <constraint firstItem="tI9-Ig-FUX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="bH6-dH-tme"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7Vn-TV-KzU" secondAttribute="trailing" constant="16" id="bxy-yy-Cx7"/>
-                            <constraint firstItem="tI9-Ig-FUX" firstAttribute="leading" secondItem="ZXn-L9-yih" secondAttribute="trailing" constant="8" id="ncA-8u-wia"/>
+                            <constraint firstItem="ZXn-L9-yih" firstAttribute="top" secondItem="tI9-Ig-FUX" secondAttribute="bottom" constant="8" id="ftx-Ut-0Zl"/>
+                            <constraint firstItem="tI9-Ig-FUX" firstAttribute="width" secondItem="gxH-69-w5U" secondAttribute="width" id="lX9-on-ykN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ZXn-L9-yih" secondAttribute="trailing" constant="16" id="mjo-84-hj6"/>
+                            <constraint firstItem="gxH-69-w5U" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="o8e-OP-N4h"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="Dxs-bA-hAn" id="n6f-ap-7AS"/>
-                        <outlet property="liveColor" destination="7Vn-TV-KzU" id="kBK-Ti-3Rw"/>
-                        <outlet property="segmentedControl" destination="tI9-Ig-FUX" id="jFL-G8-bfC"/>
+                        <outlet property="liveControl" destination="gxH-69-w5U" id="Efx-EI-OB5"/>
+                        <outlet property="shapeControl" destination="tI9-Ig-FUX" id="jFL-G8-bfC"/>
                         <outlet property="skView" destination="xtN-8W-xyG" id="KHI-92-jcg"/>
                         <outlet property="slider" destination="ZXn-L9-yih" id="J8v-08-Q1X"/>
                     </connections>
